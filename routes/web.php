@@ -89,3 +89,20 @@ Route::get('who',function () {
         return "You must be login";
     }
 });
+
+Route::get('excelExport', function () {
+    $users = App\User::all()->toArray();
+    Excel::create('Product', function($excel) {
+        $excel->sheet('Sheetname', function($sheet) {
+            $sheet->fromArray(App\products::with('user')->orderBy('id','asc')->get());
+        });
+    })->export('xls');
+});
+
+Route::get('excelImport', function () {
+    Excel::load('public/excel/Product.xls', function($reader) {
+        $results = $reader->get()->toArray();
+        dump($results);
+    
+    });
+});
