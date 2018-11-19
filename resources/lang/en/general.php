@@ -14,5 +14,6 @@ return [
     'add_product' => 'Add New Product',
     'name_tip' => 'product name must be unique.',
     'price_tip' => 'price must be number.',
-    'weight_tip' => 'weight name must be number.'
+    'weight_tip' => 'weight name must be number.',
+    'edit_product' => 'Edit Product'
 ];

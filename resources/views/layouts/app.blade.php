@@ -15,7 +15,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 
 <body>
@@ -63,6 +63,11 @@
                                     </form>
                                 </div>
                             </li>
+                            @can('subscribe', Auth::user())
+                                <li class="nav-item subscribe">
+                                    <a href="{{ route('subscribe') }}" title="subscribe">Subscribe</a>
+                                </li>
+                            @endcan
                         @endguest
                     </ul>
                 </div>

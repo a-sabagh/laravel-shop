@@ -63,3 +63,24 @@ body {
     letter-spacing: 1px;
     content: "Example";
 }
+.capitilize{
+    text-transform: capitalize;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #ccc;
+    display: inline-block;
+}
+.seprator:last-child{
+    display: none;
+}
+.edit {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.nav-item.subscribe a {
+    color: inherit;
+    display: block;
+    line-height: 40px;
+    margin: 0 10px;
+}

@@ -53,3 +53,39 @@ Route::get('getsession',function(Illuminate\Http\Request $request){
     $session_contnet = $request->session()->get('firstName');
     dd($session_contnet);
 });
+Route::get('product/{id}/edit','productController@editProduct')->name('edit.product');
+Route::put('product/{id}','productController@updateProduct')->name('update.product');
+Route::get('user/{id}/products', function ($id) {
+    $products = \App\User::find($id)->products()->orderBy('id','ASC')->get();
+    foreach($products as $product):
+        dump($product->user_id);
+    endforeach;
+});
+Route::get('category/{id}/products', function ($id) {
+    dd(\App\category::find($id)->products()->orderBy('id','DESC')->get());
+});
+Route::get('/subscribe', function () {
+    $user = Auth::user();
+    if(Gate::allows('subscribe',$user)){
+        return view('subscribe',compact('user'));
+    }else{
+        return 'You are not subscriber';
+    }
+})->name('subscribe');
+Route::get('sms', function () {
+    $message = "Hello Abolfazl Kavenegar is ready";
+    $api = new \Kavenegar\KavenegarApi(env('KAVENEGAR_API_KEY'));
+    $api->Send(env('KAVENEGAR_SENDER'),"09361825145",$message);
+});
+Route::get('who',function () {
+    $user = Auth::user();
+    if(isset($user))
+    {
+        \App\Jobs\LoggingUser::dispatch($user);
+        return "hello {$user->name}";
+    }
+    else
+    {
+        return "You must be login";
+    }
+});
