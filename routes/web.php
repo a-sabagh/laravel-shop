@@ -91,18 +91,16 @@ Route::get('who',function () {
 });
 
 Route::get('excelExport', function () {
-    $users = App\User::all()->toArray();
-    Excel::create('Product', function($excel) {
+    Excel::create('Courses', function($excel) {
         $excel->sheet('Sheetname', function($sheet) {
-            $sheet->fromArray(App\products::with('user')->orderBy('id','asc')->get());
+            $sheet->fromArray(App\Course::all()->toArray());
         });
-    })->export('xls');
+    })->export('csv');
 });
 
 Route::get('excelImport', function () {
     Excel::load('public/excel/Product.xls', function($reader) {
         $results = $reader->get()->toArray();
         dump($results);
-    
     });
 });
