@@ -54,7 +54,6 @@ public function archive()
     public function saveProduct(storeProduct $request)
     {
         $user = Auth::user();
-        // $request->validated();
         $product_params = $request->except(['_token','category_id']);
         $product_params['status'] = 1;
         $product = $user->products()->create($product_params);

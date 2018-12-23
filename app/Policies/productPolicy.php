@@ -52,9 +52,9 @@ class productPolicy
      * @param  \App\products  $products
      * @return mixed
      */
-    public function delete(User $user, products $products)
+    public function delete(User $user, products $product)
     {
-        //
+        return $product->user_id === $user->id;
     }
 
     /**
