@@ -93,7 +93,7 @@ Route::get('who',function () {
 Route::get('excelExport', function () {
     Excel::create('Courses', function($excel) {
         $excel->sheet('Sheetname', function($sheet) {
-            $sheet->fromArray(App\Course::all()->toArray());
+            $sheet->fromArray(App\Course::get(['title','duration','price','author'])->toArray());
         });
     })->export('csv');
 });
@@ -104,3 +104,6 @@ Route::get('excelImport', function () {
         dump($results);
     });
 });
+
+Route::get('uploadExcel','CourseController@course');
+Route::post('uploadExcel','CourseController@upload');
